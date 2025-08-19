@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <h1>Prediction Result</h1>
+
+      {% if prediction is defined and threshold is defined %}
+        <p><strong>Benzene Concentration:</strong> {{ prediction }} µg/m³</p>
+
+        {% if prediction > threshold %}
+          <div class="warning">⚠️ High concentration detected. Avoid prolonged exposure.</div>
+        {% else %}
+          <div class="safe">✅ Air quality is within safe limits.</div>
+        {% endif %}
+      {% else %}
+        <div class="warning">
+          ⚠️ No prediction data received. Please submit the form from the home page.
+        </div>
+      {% endif %}
+
+      <a href="{{ url_for('index') }}">🔙 Go Back</a>
+    </div>
+  </div>
+</body>
+</html>

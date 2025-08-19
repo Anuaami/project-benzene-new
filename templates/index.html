@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Benzene Concentration Predictor</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="overlay">
+    <div class="container">
+      <img src="{{ url_for('static', filename='air+pollution.jpg') }}" alt="Air Pollution Banner" class="banner">
+
+      <h1>Benzene Concentration Predictor</h1>
+      <p>Enter environmental parameters to estimate benzene levels and receive health guidance.</p>
+      <form method="POST" action="/result">
+        <div class="form-grid">
+          {% for feature in ["NOx(GT)", "PT08.S3(NOx)", "NO2(GT)", "PT08.S4(NO2)", "PT08.S5(O3)", "T", "RH", "AH"] %}
+            <div class="form-group">
+              <label for="{{ feature }}">{{ feature }}</label>
+              <input type="number" step="0.1" name="{{ feature }}" required>
+            </div>
+          {% endfor %}
+        </div>
+        <button type="submit">Predict</button>
+      </form>
+    </div>
+  </div>
+</body>
+</html>
